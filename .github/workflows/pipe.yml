@@ -37,8 +37,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: echo "info ${{ env.DB_NAME }}"
-      - run: echo "db_pass-secret: ${{ env.DB_PASS }}"
+      - run: echo "info ${{ env.DB_NAME }} ${{ env.DB_PASS }}"
   deploy:
     needs: build
     runs-on: ubuntu-latest
