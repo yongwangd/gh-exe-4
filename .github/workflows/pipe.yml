@@ -1,7 +1,13 @@
 name: lint test and build
 on: push
+env:
+  GITHUB_OUTPUT: ${{ github.workspace }}/github.output
+  DB_NAME: demo-db
 jobs:
   build:
+    env:
+      GITHUB_OUTPUT: ${{ github.workspace }}/github.output
+      CLUSTER: my-cluster
     runs-on: ubuntu-latest
     outputs:
       html: ${{ steps.publish-html.outputs.html }}
@@ -27,6 +33,11 @@ jobs:
         with:
           name: dist-files
           path: dist
+  info:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "info ${{ env.DB_NAME }}"
   deploy:
     needs: build
     runs-on: ubuntu-latest
