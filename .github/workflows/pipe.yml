@@ -9,3 +9,8 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run build
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist
