@@ -1,0 +1,9 @@
+name: issue info
+on:
+  issues:
+    types: [opened, edited]
+jobs:
+  issue-info:
+    runs-on: ubuntu-latest
+    steps:
+      run: echo "issue info ${{ github.event.issue.title }}"
