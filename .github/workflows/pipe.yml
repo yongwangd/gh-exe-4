@@ -19,9 +19,10 @@ jobs:
       - name: Cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+        if: steps.cache.outputs.cache-hit != 'true'
       - run: npm run lint
       - run: npm run test
       - run: npm run build
@@ -46,13 +47,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      # - name: Cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.npm
+      #     key: node-${{ hashFiles('**/package-lock.json') }}
+      # - run: npm ci
       - name: Cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
-
+        if: steps.cache.outputs.cache-hit != 'true'
       - name: get build artifacts
         uses: actions/download-artifact@v3
         with:
