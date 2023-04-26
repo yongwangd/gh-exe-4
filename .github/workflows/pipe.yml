@@ -2,7 +2,7 @@ name: lint test and build
 on: push
 env:
   GITHUB_OUTPUT: ${{ github.workspace }}/github.output
-  DB_NAME: demo-db
+  DB_PASS: ${{ secrets.DB_PASS }}
 jobs:
   build:
     env:
@@ -38,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "info ${{ env.DB_NAME }}"
+      - run: echo "db_pass-secret: ${{ env.DB_PASS }}"
   deploy:
     needs: build
     runs-on: ubuntu-latest
