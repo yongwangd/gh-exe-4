@@ -1,7 +1,7 @@
 name: lint test and build
 on: push
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,3 +17,13 @@ jobs:
         with:
           name: dist-files
           path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+      - name: output contents of dist
+        run: ls
