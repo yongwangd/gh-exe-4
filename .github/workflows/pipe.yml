@@ -10,6 +10,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
       - run: npm run lint
       - run: npm run test
@@ -30,6 +35,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
 
       - name: get build artifacts
