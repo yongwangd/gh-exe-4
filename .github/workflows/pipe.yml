@@ -34,4 +34,4 @@ jobs:
         run: ls
       - name: list outputs from build job
         run: cat $GITHUB_OUTPUT
-      - run echo "${{ needs.build.outputs.html }}"
+      - run: echo "${{ needs.build.outputs.html }}"
